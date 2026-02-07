@@ -1,24 +1,38 @@
+import uvicorn
+import joblib
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-import joblib
-import asyncio
+
+from predict import predict_from_input, InputData, OutputData
+
+PATH = "/Users/anatolijperederij/PycharmProjects/demand-forecasting-pipeline/models/GradientBoosting.pkl"
 
 model = None
-PATH = ""
 
 
-def load_model():
+def load_model(path):
     global model
-    model = joblib.load(PATH)
+    model = joblib.load(path)
+
 
 def unload_model():
     global model
     model = None
 
+
 @asynccontextmanager
-async def lifespan():
-    load_model()
+async def lifespan(app: FastAPI):
+    load_model(PATH)
     yield
     unload_model()
 
-app = FastAPI(lifespan = lifespan)
+
+app = FastAPI(lifespan=lifespan)
+
+@app.post("/predict", response_model=OutputData)
+def predict(input_data: InputData):
+    return predict_from_input(model, input_data)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

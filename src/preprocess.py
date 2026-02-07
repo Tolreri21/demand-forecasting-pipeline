@@ -37,8 +37,8 @@ raw_data_aggted_test = raw_data_aggted.filter(col("InvoiceDate")  > date_to_spli
 
 print(f"amount of rows in train : {raw_data_aggted_train.count()} amount of rows in test : {raw_data_aggted_test.count()}")
 
-country_indexer = StringIndexer(inputCol="Country", outputCol="CountryIndex")
-stock_code = StringIndexer(inputCol="StockCode", outputCol="StockCodeIndex")
+country_indexer = StringIndexer(inputCol="Country", outputCol="CountryIndex",handleInvalid="keep")
+stock_code = StringIndexer(inputCol="StockCode", outputCol="StockCodeIndex",handleInvalid="keep")
 
 
 
@@ -58,11 +58,11 @@ y_train = raw_data_aggted_train.select("Quantity")
 y_test = raw_data_aggted_test.select("Quantity")
 
 # Saving data
-X_train.write.mode("overwrite").parquet(r"C:\Users\TOLK\PycharmProjects\demand_forecasting\data\processed/X_train.parquet")
-X_test.write.mode("overwrite").parquet(r"C:\Users\TOLK\PycharmProjects\demand_forecasting\data\processed/X_test.parquet")
+X_train.write.mode("overwrite").parquet(r"/Users/anatolijperederij/PycharmProjects/demand-forecasting-pipeline/data/processed/X_train.parquet")
+X_test.write.mode("overwrite").parquet(r"/Users/anatolijperederij/PycharmProjects/demand-forecasting-pipeline/data/processed/X_test.parquet")
 
-y_train.write.mode("overwrite").parquet(r"C:\Users\TOLK\PycharmProjects\demand_forecasting\data\processed/y_train.parquet")
-y_test.write.mode("overwrite").parquet(r"C:\Users\TOLK\PycharmProjects\demand_forecasting\data\processed/y_test.parquet")
+y_train.write.mode("overwrite").parquet(r"/Users/anatolijperederij/PycharmProjects/demand-forecasting-pipeline/data/processed/y_train.parquet")
+y_test.write.mode("overwrite").parquet(r"/Users/anatolijperederij/PycharmProjects/demand-forecasting-pipeline/data/processed/y_test.parquet")
 
 
 
