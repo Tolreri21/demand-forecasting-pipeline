@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 
 from predict import predict_from_input, InputData, OutputData
 
-PATH = "/Users/anatolijperederij/PycharmProjects/demand-forecasting-pipeline/models/GradientBoosting.pkl"
+PATH = "models/GradientBoosting.pkl"
 
 model = None
 
@@ -33,6 +33,7 @@ app = FastAPI(lifespan=lifespan)
 def predict(input_data: InputData):
     return predict_from_input(model, input_data)
 
+PORT = 8000
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=PORT )
