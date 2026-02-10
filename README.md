@@ -18,3 +18,17 @@ data preprocessing, feature preparation, and model training with scikit-learn an
 
 ## Notes
 - This project is intended for local experimentation; adjust paths as needed.
+
+## request to try
+
+curl -X POST http://localhost:8000/predict \
+-H "Content-Type: application/json" \
+-d '{
+  "CountryIndex": 0.0,
+  "StockCodeIndex": 662.0,
+  "Month": 10,
+  "Year": 2011,
+  "DayOfWeek": 7,
+  "Day": 1,
+  "Week": 39
+}'

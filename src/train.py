@@ -26,8 +26,8 @@ mlflow.set_experiment("models with 100 estimators ")
 
 # Определяем модели
 models = {
-    "RandomForest": RandomForestRegressor(n_estimators=100, random_state=42),
-    "GradientBoosting": GradientBoostingRegressor(n_estimators=100, random_state=42)
+    "RandomForest": RandomForestRegressor(n_estimators=100, random_state=42 , max_depth=10, min_samples_split=5, max_features="sqrt"),
+    "GradientBoosting": GradientBoostingRegressor(n_estimators=100, random_state=42, max_depth=10, min_samples_split=5, max_features="sqrt")
 }
 
 
@@ -61,7 +61,7 @@ this function trains our models and is logging all info about them
         print(f"  MAE:  {mae:.4f}")
         print(f"  R²:   {r2:.4f}")
 
-        joblib.dump(model, f"../models/{model_name}.pkl")
+        joblib.dump(model, f"../app/models/{model_name}.pkl")
 
         return model
 

@@ -32,4 +32,5 @@ venv/
 
 # Project artifacts
 data/processed/
-
+app/models
+mlruns/

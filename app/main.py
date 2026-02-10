@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 
 from predict import predict_from_input, InputData, OutputData
 
-PATH = "models/GradientBoosting.pkl"
+PATH = "app/models/RandomForest.pkl"
 
 model = None
 
